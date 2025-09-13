@@ -1,11 +1,18 @@
-import './navigation.css';
+import './navigation.scss';
 function NavBar(){
     return(
         <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/films">Films</a></li>
-                <li><a href="/customers">Customers</a></li>
+            <div class="scanlines"></div>
+            <ul class="intro-wrap">
+                <li class="play" data-splitting>SAKILA</li>
+                <li class="time">
+                    <a href="/">HOME</a>
+                    --
+                    <a href='/films'>FILMS</a>
+                    --
+                    <a href='/customers'>CUSTOMERS</a>
+                </li>
+                <li class="recordSpeed">SLP 0:00:00</li>
             </ul>
         </nav>
     );
