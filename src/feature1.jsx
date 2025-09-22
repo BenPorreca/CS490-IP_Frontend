@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 
-function Movie ({name}) {
+function Movie ({movie}) {
+    const details = () => {
+        window.alert("Name: " + movie.name + " ID: " + movie.film_id + " Rentals: " + movie.rental_count);
+    };
     return (
-        <li>{name}</li>
+        <li><button onClick={details}>Details</button> {movie.title}</li>
     );
 };
 
@@ -18,6 +21,7 @@ function MovieList () {
                 }
                 const result = await response.json();
                 setMovies(result);
+                console.log(result);
             } catch (error) {
                 console.error(error.message);
             }
@@ -30,7 +34,7 @@ function MovieList () {
             <h1>Feature 1:</h1>
             <ul>
                 {movies.map((movie) => {
-                    return <Movie key={movie.film_id} name={movie.title}> </Movie>
+                    return <Movie key={movie.film_id} movie={movie}> </Movie>
                 })}
             </ul>
         </div>
