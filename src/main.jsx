@@ -1,12 +1,12 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import NavBar from './navigation.jsx'
-import MainPage from './landing.jsx'
+import Feature1 from './feature1.jsx'
 import './index.css';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <NavBar />
-    <MainPage />
+    <div className='wrapper'>
+      <Feature1 />
+    </div>
   </StrictMode>,
 )
