@@ -21,7 +21,6 @@ function MovieList () {
                 }
                 const result = await response.json();
                 setMovies(result);
-                console.log(result);
             } catch (error) {
                 console.error(error.message);
             }
@@ -31,10 +30,10 @@ function MovieList () {
 
     return (
         <div>
-            <h1>Feature 1:</h1>
+            <h1>Feature 1 & 2:</h1>
             <ul>
                 {movies.map((movie) => {
-                    return <Movie key={movie.film_id} movie={movie}> </Movie>
+                    return <Movie key={movie.film_id} movie={movie} />
                 })}
             </ul>
         </div>
