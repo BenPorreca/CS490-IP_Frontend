@@ -1,11 +1,16 @@
 import { useEffect, useState } from "react";
+import {ModalMovie} from './modal.jsx'
 
 function Movie ({movie}) {
-    const details = () => {
-        window.alert("Name: " + movie.name + " ID: " + movie.film_id + " Rentals: " + movie.rental_count);
-    };
+    const [isModalOpen, setModalOpen] = useState(false);
+    const toggleOpen = () => {
+        setModalOpen(!isModalOpen)
+    }
     return (
-        <li><button onClick={details}>Details</button> {movie.title}</li>
+        <div>
+            <li><button onClick={toggleOpen}>Details</button> {movie.title}: {movie.rental_count} Rents</li>
+            {isModalOpen && <ModalMovie setModalOpen={setModalOpen} movie={movie}/>}
+        </div>
     );
 };
 

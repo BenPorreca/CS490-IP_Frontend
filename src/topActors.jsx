@@ -1,23 +1,11 @@
-import { act, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import {ModalActor} from './modal.jsx'
 
 function Actor ({actor}) {
-    const [movies, setMovies] = useState([]);
-
-    useEffect(() => {
-        const fetchActorMovies = async() => {
-            try {
-                const response = await fetch("/api/actorInfo/" + actor.actor_id);
-                if (!response.ok) {
-                throw new Error(`Response status: ${response.status}`);
-                }
-                const result = await response.json();
-                setMovies(result);
-            } catch (error) {
-                console.error(error.message);
-            }
-        }
-        fetchActorMovies();
-    }, []);
+    const [isModalOpen, setModalOpen] = useState(false);
+    const toggleOpen = () => {
+        setModalOpen(!isModalOpen)
+    }
 
     const details = () => {
         for (let i = 0; i < movies.length; i++) {
@@ -27,7 +15,10 @@ function Actor ({actor}) {
     };
 
     return (
-        <li><button onClick={details}>Details</button> {actor.first_name} {actor.last_name}</li>
+        <div>
+            <li><button onClick={toggleOpen}>Details</button> {actor.first_name} {actor.last_name}</li>
+            {isModalOpen && <ModalActor setModalOpen={setModalOpen} actor={actor}/>}
+        </div>
     );
 };
 
