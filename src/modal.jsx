@@ -13,7 +13,7 @@ export function ModalMovie ({setModalOpen, movie}) {
                     <p>Genre: {movie.name}</p>
                     <p>Release Year: {movie.release_year}</p>
                     <p>Rating: {movie.rating}</p>
-                    <p>Length: {movie.length}</p>
+                    <p>Length: {movie.length} minutes</p>
                 </div>
                 <div className='footer'>
                     <button onClick={() => setModalOpen(false)}>Close</button>
@@ -49,9 +49,9 @@ export function ModalActor ({setModalOpen, actor}) {
                     <h2>{actor.first_name} {actor.last_name}</h2>
                 </div>
                 <div className='body'>
-                    <h3>Movies</h3>
+                    <h3>Top Movies</h3>
                     {movies.map((movie) => {
-                        return <p>{movie.title}</p>
+                        return <p>{movie.title}: {movie.rental_count} rents</p>
                     })}
                 </div>
                 <div className='footer'>
