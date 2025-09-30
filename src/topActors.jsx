@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import {ModalActor} from './modal.jsx'
+import "./landing.css";
 
 function Actor ({actor}) {
     const [isModalOpen, setModalOpen] = useState(false);
@@ -16,7 +17,7 @@ function Actor ({actor}) {
 
     return (
         <div>
-            <li><button onClick={toggleOpen}>Details</button> {actor.first_name} {actor.last_name}</li>
+            <li><button onClick={toggleOpen}>{actor.first_name} {actor.last_name}: {actor.film_count} Films</button></li>
             {isModalOpen && <ModalActor setModalOpen={setModalOpen} actor={actor}/>}
         </div>
     );
@@ -42,8 +43,8 @@ function ActorList () {
     }, []);
 
     return (
-        <div>
-            <h1>Feature 3 & 4:</h1>
+        <div className="page">
+            <h1>Top 5 Actors:</h1>
             <ul>
                 {actors.map((actor) => {
                     return <Actor key={actor.actor_id} actor={actor} />

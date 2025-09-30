@@ -1,0 +1,66 @@
+.catalog {
+  margin: 20px;
+}
+
+input[type="text"] {
+  background: #f8f9fa;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 250px;
+  margin-right: 10px;
+  outline: none;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+input[type="text"]:focus {
+  border-color: #6a5acd;
+  box-shadow: 0 0 5px rgba(106, 90, 205, 0.4);
+}
+
+input[type="text"]:hover {
+  background-color: #e1daff;
+  border-color: #888;
+  box-shadow: 0 0 5px rgba(106, 90, 205, 0.4);
+}
+
+button[type="submit"] {
+  background: #f8f9fa;
+  border: 1px solid #ccc;
+  color: black;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+}
+
+button[type="submit"]:hover {
+  background-color: #e1daff;
+  border-color: #888;
+  box-shadow: 0 0 5px rgba(106, 90, 205, 0.4);
+}
+
+select {
+  transition: all 0.2s ease-in-out;  
+  background: #f8f9fa;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+select:focus {
+  background-color: #e1daff;
+  border-color: #888;
+  box-shadow: 0 0 5px rgba(75, 58, 143, 0.4);
+}
+
+select:hover {
+  background-color: #e1daff;
+  border-color: #888;
+  box-shadow: 0 0 5px rgba(75, 58, 143, 0.4);
+}

@@ -1,0 +1,40 @@
+.page {
+  margin: 20px;
+}
+
+h1::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: #ccc;
+  margin-top: 0.5rem;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+li button {
+  width: 100%;
+  background: #f8f9fa;
+  border: 1px solid #ddd;
+  padding: 1rem 1.5rem;
+  text-align: left;
+  font-size: 1.1rem;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+li button:hover {
+  background-color: #e1daff;
+  border-color: #888;
+  box-shadow: 0 0 5px rgba(106, 90, 205, 0.4);
+}

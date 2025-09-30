@@ -1,43 +1,102 @@
 import { useState } from "react";
+import Pagination from "./pagination";
+import "./filmCatalog.css";
+
 
 function FilmCatalog () {
     const [query, setQuery] = useState("");
     const [searchType, setSearchType] = useState("movie");
+    const [results, setResults] = useState([]);
 
     const movieSearch = async(e) => {
+        e.preventDefault();
+        if (!query.trim()) {
+            return;
+        }
         console.log("search type: " + searchType + " and query: " + query);
         try {
             e.preventDefault();
-            
             const response = await fetch(`/api/search?type=${searchType}&query=${query}`);
             if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
             }
             const result = await response.json();
-            console.log(result);
+            setResults(result);
         } catch (error) {
             console.error(error.message);
         }
     };
 
     return(
-        <form onSubmit={movieSearch}>
-            <h1>Feature 5</h1>
-            <input type="text" onChange={(e) => setQuery(e.target.value)}/>
-            <button type="submit">Submit</button>
-            <br />
-            <label><b>Search By:</b></label>
-            <br />
-            <label>Movie:</label>
-            <input type="radio" name="search" value="movie" onChange={(e) => setSearchType(e.target.value)}/>
-            <br />
-            <label>Actor:</label>
-            <input type="radio" name="search" value="actor" onChange={(e) => setSearchType(e.target.value)}/>
-            <br />
-            <label>Genre:</label>
-            <input type="radio" name="search" value="genre" onChange={(e) => setSearchType(e.target.value)}/>
+        <div className="catalog">
+            <form onSubmit={movieSearch}>
+                <h1>Feature 5</h1>
+                <input type="text" 
+                        onChange={(e) => setQuery(e.target.value)}
+                        placeholder="Enter your search..."
+                />
+                <select value={searchType} onChange={(e) => { setSearchType(e.target.value); setResults([]); }}>
+                    <option value="movie">Movie</option>
+                    <option value="actor">Actor</option>
+                    <option value="genre">Genre</option>
+                </select>
+                <button type="submit">Submit</button>
+            </form>
+            {results.length > 0 && (
+                <>
+                    {searchType === "movie" && (
+                        <Pagination
+                            name="Movies by Name"
+                            data={results}
+                            headers={["Title", "Description"]}
+                            renderRow={(item) => (
+                                <tr key={item.film_id}>
+                                    <td>{item.title}</td>
+                                    <td>{item.description}</td>
+                                </tr>
+                            )}
+                        />
+                    )}
 
-        </form>
+                    {searchType === "genre" && (
+                        <Pagination
+                            name="Movies by Genre"
+                            data={results}
+                            headers={["Title", "Genre"]}
+                            renderRow={(item) => (
+                                <tr key={item.film_id}>
+                                    <td>{item.title}</td>
+                                    <td>{item.name}</td>
+                                </tr>
+                            )}
+                        />
+                    )}
+
+                    {searchType === "actor" && (
+                        <Pagination
+                            name="Movies by Actor"
+                            data={results}
+                            headers={["Title", "Actor"]}
+                            renderRow={(item) => (
+                                <tr key={item.film_id}>
+                                    <td>{item.title}</td>
+                                    <td>{item.first_name} {item.last_name}</td>
+                                </tr>
+                            )}
+                        />
+                    )}
+                </>
+            )}
+            {results.length === 0 && (
+                <>
+                    <br />
+                    <br />
+                    <br />
+                    <h1>No Results</h1>
+                </>
+            )}
+
+        </div>        
     );
 };
 

@@ -25,6 +25,7 @@ export function ModalMovie ({setModalOpen, movie}) {
 
 export function ModalActor ({setModalOpen, actor}) {
     const [movies, setMovies] = useState([]);
+    const [selectedMovie, setSelectedMovie] = useState(null);
 
     useEffect(() => {
         const fetchActorMovies = async() => {
@@ -50,9 +51,17 @@ export function ModalActor ({setModalOpen, actor}) {
                 </div>
                 <div className='body'>
                     <h3>Top Movies</h3>
-                    {movies.map((movie) => {
-                        return <p>{movie.title}: {movie.rental_count} rents</p>
-                    })}
+                    {movies.map((movie) => (
+                        <button key={movie.film_id} onClick={() => setSelectedMovie(movie)}>{movie.title}: {movie.rental_count}</button>
+                    ))}
+
+                    {selectedMovie && (
+                        <ModalMovie
+                            setModalOpen={() => setSelectedMovie(null)}
+                            movie={selectedMovie}
+                        />
+                    )}
+
                 </div>
                 <div className='footer'>
                     <button onClick={() => setModalOpen(false)}>Close</button>

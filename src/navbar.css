@@ -1,4 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 .navbar {
+  font-family: Poppins;
   display: flex;
   justify-content: space-between;
   align-items: center;

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import {ModalMovie} from './modal.jsx'
+import "./landing.css";
 
 function Movie ({movie}) {
     const [isModalOpen, setModalOpen] = useState(false);
@@ -8,7 +9,7 @@ function Movie ({movie}) {
     }
     return (
         <div>
-            <li><button onClick={toggleOpen}>Details</button> {movie.title}: {movie.rental_count} Rents</li>
+            <li><button onClick={toggleOpen}>{movie.title}: {movie.rental_count} Rents</button></li>
             {isModalOpen && <ModalMovie setModalOpen={setModalOpen} movie={movie}/>}
         </div>
     );
@@ -34,8 +35,8 @@ function MovieList () {
     }, []);
 
     return (
-        <div>
-            <h1>Feature 1 & 2:</h1>
+        <div className="page">
+            <h1>Top 5 Movies:</h1>
             <ul>
                 {movies.map((movie) => {
                     return <Movie key={movie.film_id} movie={movie} />
