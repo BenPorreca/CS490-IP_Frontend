@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Pagination from "./pagination";
+import { ModalMovie } from "./modal";
 import "./filmCatalog.css";
 
 
@@ -7,6 +8,8 @@ function FilmCatalog () {
     const [query, setQuery] = useState("");
     const [searchType, setSearchType] = useState("movie");
     const [results, setResults] = useState([]);
+    const [modalOpen, setModalOpen] = useState(false);
+    const [selectedMovie, setSelectedMovie] = useState(null);
 
     const movieSearch = async(e) => {
         e.preventDefault();
@@ -25,6 +28,11 @@ function FilmCatalog () {
         } catch (error) {
             console.error(error.message);
         }
+    };
+
+    const handleMovieClick = (movie) => {
+        setSelectedMovie(movie);
+        setModalOpen(true);
     };
 
     return(
@@ -51,7 +59,11 @@ function FilmCatalog () {
                             headers={["Title", "Description"]}
                             renderRow={(item) => (
                                 <tr key={item.film_id}>
-                                    <td>{item.title}</td>
+                                    <td>
+                                        <button className="link-button" onClick={() => handleMovieClick(item)}>
+                                            {item.title}
+                                        </button>
+                                    </td>
                                     <td>{item.description}</td>
                                 </tr>
                             )}
@@ -65,7 +77,11 @@ function FilmCatalog () {
                             headers={["Title", "Genre"]}
                             renderRow={(item) => (
                                 <tr key={item.film_id}>
-                                    <td>{item.title}</td>
+                                    <td>
+                                        <button className="link-button" onClick={() => handleMovieClick(item)}>
+                                            {item.title}
+                                        </button>
+                                    </td>
                                     <td>{item.name}</td>
                                 </tr>
                             )}
@@ -79,7 +95,11 @@ function FilmCatalog () {
                             headers={["Title", "Actor"]}
                             renderRow={(item) => (
                                 <tr key={item.film_id}>
-                                    <td>{item.title}</td>
+                                    <td>
+                                        <button className="link-button" onClick={() => handleMovieClick(item)}>
+                                            {item.title}
+                                        </button>
+                                    </td>
                                     <td>{item.first_name} {item.last_name}</td>
                                 </tr>
                             )}
@@ -94,6 +114,10 @@ function FilmCatalog () {
                     <br />
                     <h1>No Results</h1>
                 </>
+            )}
+
+            {modalOpen && selectedMovie && (
+                <ModalMovie setModalOpen={setModalOpen} movie={selectedMovie} />
             )}
 
         </div>        

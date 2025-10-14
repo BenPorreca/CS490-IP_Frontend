@@ -64,3 +64,20 @@ select:hover {
   border-color: #888;
   box-shadow: 0 0 5px rgba(75, 58, 143, 0.4);
 }
+
+.link-button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.link-button:hover {
+  text-decoration: underline;
+  color: #0074cc;
+}

@@ -70,3 +70,67 @@ export function ModalActor ({setModalOpen, actor}) {
         </div>
     );
 };
+
+export function ModalCustomer({ setModalOpen, customer, rentals }) {
+    const [rentalHistory, setRentalHistory] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    return (
+        <div className="modalBackground">
+            <div className="modalContainer">
+                <div className="title">
+                    <h2>
+                        {customer.first_name} {customer.last_name}
+                    </h2>
+                </div>
+
+                <div className="body">
+                    <h3>Customer Information</h3>
+                    <p><strong>Customer ID:</strong> {customer.customer_id}</p>
+                    <p><strong>Email:</strong> {customer.email}</p>
+                    <p><strong>Active:</strong> {customer.active ? "Yes" : "No"}</p>
+                    <p><strong>Address:</strong> {customer.address}</p>
+                    <p><strong>District:</strong> {customer.district}</p>
+                    <p><strong>City:</strong> {customer.city}</p>
+                    <p><strong>Country:</strong> {customer.country}</p>
+                    <p><strong>Postal Code:</strong> {customer.postal_code}</p>
+                    <p><strong>Phone:</strong> {customer.phone}</p>
+                    <p><strong>Created:</strong> {customer.create_date}</p>
+                    <p><strong>Last Update:</strong> {customer.last_update}</p>
+
+                    <h3>Rental History</h3>
+                    {(!rentals || rentals.length === 0) ? (
+                        <p>No rental history found.</p>
+                    ) : (
+                        <table className="rental-table">
+                            <thead>
+                                <tr>
+                                    <th>Rental ID</th>
+                                    <th>Film Name</th>
+                                    <th>Rental Date</th>
+                                    <th>Return Date</th>
+                                    <th>Last Update</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {rentals.map((rental) => (
+                                    <tr key={rental.rental_id}>
+                                        <td>{rental.rental_id}</td>
+                                        <td>{rental.film_name}</td>
+                                        <td>{new Date(rental.rental_date).toLocaleString()}</td>
+                                        <td>{rental.return_date ? new Date(rental.return_date).toLocaleString() : "Not returned"}</td>
+                                        <td>{new Date(rental.last_update).toLocaleString()}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    )}
+                </div>
+
+                <div className="footer">
+                    <button onClick={() => setModalOpen(false)}>Close</button>
+                </div>
+            </div>
+        </div>
+    );
+};
